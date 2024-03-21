@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import { addTodo } from "./REDUX/todoSlice";
+import { addTodo, removeTodo } from "./REDUX/todoSlice";
 import {  useState } from "react";
-import { NavItem } from "react-bootstrap";
+
 
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
 
   const addNewTodo=()=>{
     dispatch(addTodo({ toDoDetails: todoName }))
+    setTodoName("")
   }
 
 
@@ -33,19 +34,20 @@ function App() {
         }}
       >
         <div className="p-4 container" style={{ backgroundColor: "white", width: "90%" }}>
-          <h1>My Todo list</h1>
+          <h1 className="mb-4">My Todo list</h1>
           <div className="d-flex w-50">
             <input
               type="text"
               className="form-control"
               placeholder="Add todo"
+              value={todoName}
               onChange={(e)=>handleChange(e.target.value)}
             />
-            <button onClick={addNewTodo} className="btn btn-info">Submit</button>
+            <button onClick={addNewTodo} className="btn btn-info ms-2">Submit</button>
           </div>
 
           <div className="mt-3">
-            {allTodo.length>0?allTodo.map(item=>(
+            {allTodo.length>0?allTodo.map((item,index)=>(
               <div
               style={{ height: "80px" }}
               className="d-flex justify-content-between align-items-center border p-3"
@@ -61,7 +63,7 @@ function App() {
                   {item.toDoDetails}
                 </label>
               </div>
-              <button className="btn btn-danger">Delete</button>
+              <button onClick={()=>dispatch(removeTodo(index))} className="btn btn-danger">Delete</button>
             </div>
             ))
           :

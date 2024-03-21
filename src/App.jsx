@@ -9,6 +9,7 @@ function App() {
 
   const dispatch = useDispatch()
   const [todoName,setTodoName] = useState("")
+  const [chek,setchek] = useState(0)
   const allTodo = useSelector(state=>state.todoReducer)
 
   const handleChange=(e)=>{
@@ -20,6 +21,15 @@ function App() {
     setTodoName("")
   }
 
+  const handleCount = (e) =>{
+    if(e.target.checked){
+      setchek(chek+1)
+    }
+    else{
+      setchek(chek-1)
+    }
+
+  }
 
   console.log(allTodo);
 
@@ -34,8 +44,8 @@ function App() {
         }}
       >
         <div className="p-4 container" style={{ backgroundColor: "white", width: "90%" }}>
-          <h1 className="mb-4">My Todo list</h1>
-          <div className="d-flex w-50">
+          <h1 className="mb-4 fw-bolder">My Todo list</h1>
+          <div className="d-flex w-25">
             <input
               type="text"
               className="form-control"
@@ -58,6 +68,7 @@ function App() {
                   type="checkbox"
                   value=""
                   id="flexCheckDefault"
+                  onChange={(e)=>handleCount(e)}
                 />
                 <label style={{fontSize:"20px"}} class="form-check-label ps-2" htmlFor="flexCheckDefault">
                   {item.toDoDetails}
@@ -67,9 +78,11 @@ function App() {
             </div>
             ))
           :
-          <div></div>
-          }
-            
+          <div><h6 className="text-danger">ToDo is empty!!!</h6></div>
+          } 
+          </div>
+          <div className="mt-5">
+            <h4>Total Complete items : <span style={{fontSize:"30px"}} className="text-success fw-bolder">{chek}</span></h4>
           </div>
         </div>
       </div>

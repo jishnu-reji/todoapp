@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import { addTodo } from "./REDUX/todoSlice";
 import {  useState } from "react";
+import { NavItem } from "react-bootstrap";
 
 
 function App() {
@@ -44,7 +45,7 @@ function App() {
           </div>
 
           <div className="mt-3">
-            {allTodo?.length>0?allTodo.map(item=>{
+            {allTodo.length>0?allTodo.map(item=>(
               <div
               style={{ height: "80px" }}
               className="d-flex justify-content-between align-items-center border p-3"
@@ -62,7 +63,7 @@ function App() {
               </div>
               <button className="btn btn-danger">Delete</button>
             </div>
-            })
+            ))
           :
           <div></div>
           }
